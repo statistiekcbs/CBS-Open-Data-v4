@@ -14,4 +14,4 @@ De Shapefiles die nodig zijn voor thematische kaarten zijn te vinden in de [Geog
 
 ## Licentie
 
-Op alle datasets van het CBS en alle codevorbeelden is de licentie Creative Commons Naamsvermelding van toepassing. Als onderdeel van Creative Commons Naamsvermelding is het bij hergebruik verplicht te vermelden dat de gegevens afkomstig zijn van het CBS. Meer informatie is te vinden in de [Disclaimer Open Data](https://www.cbs.nl/-/media/statline/documenten/disclaimer-open-data-v-2.pdf?la=nl-nl).
+Op alle datasets van het CBS en alle codevoorbeelden is de licentie Creative Commons Naamsvermelding van toepassing. Als onderdeel van Creative Commons Naamsvermelding is het bij hergebruik verplicht te vermelden dat de gegevens afkomstig zijn van het CBS. Meer informatie is te vinden in de [Disclaimer Open Data](https://www.cbs.nl/-/media/statline/documenten/disclaimer-open-data-v-2.pdf?la=nl-nl).
