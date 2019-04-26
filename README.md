@@ -8,6 +8,7 @@ Er wordt beschreven hoe datasets kunnen worden gedownload met metadata, hoe deze
 Voor elke taal is er een aparte map met daarin codevoorbeelden. De talen die momenteel ondersteund worden zijn
 * R
 * Python.
+
 Elke map bevat
 * basics: het downloaden van een tabel, het koppelen van metadata en het downloaden van een gedeelte van een tabel.
 * thematic map: het koppelen van shapefiles aan data om een kaart te maken.
