@@ -5,7 +5,10 @@ In deze repository zijn codevoorbeelden te vinden van het gebruik van de [beta-v
 Er wordt beschreven hoe datasets kunnen worden gedownload met metadata, hoe deze gekoppeld kunnen worden, hoe filters werken en er is een voorbeeld uitgewerkt van een thematische kaart.
 
 ## Codevoorbeelden
-Voor elke taal is er een aparte map met daarin codevoorbeelden. Elke map bevat
+Voor elke taal is er een aparte map met daarin codevoorbeelden. De talen die momenteel ondersteund worden zijn
+* R
+* Python.
+Elke map bevat
 * basics: het downloaden van een tabel, het koppelen van metadata en het downloaden van een gedeelte van een tabel.
 * thematic map: het koppelen van shapefiles aan data om een kaart te maken.
 
