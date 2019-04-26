@@ -10,9 +10,7 @@ library(tidyverse)
 library(jsonlite)
 
 get_odata <- function(targetUrl) {
-  response <- fromJSON(url(targetUrl))
-  data <- response$value
-  targetUrl <- response[["@odata.nextLink"]]
+  data <- data.frame()
   
   while(!is.null(targetUrl)){
     response <- fromJSON(url(targetUrl))
