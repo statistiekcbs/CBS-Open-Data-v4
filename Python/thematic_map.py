@@ -13,7 +13,6 @@ import geopandas as gpd
 import requests
 import os
 
-
 def get_odata(target_url):
     data = pd.DataFrame()
     while target_url:
@@ -37,7 +36,7 @@ codes = get_odata(table_url + "/MeasureCodes")
 geb = codes[codes['Title'].str.contains("Geboorte")]
 print(geb[['Title','Unit','Identifier']])
 
-target_url = table_url + "/Observations?$filter=Measure eq \'M0000173_2\' and startswith(WijkenEnBuurten,\'GM\')"
+target_url = table_url + "/Observations?$filter=Measure eq 'M0000173_2' and startswith(WijkenEnBuurten,'GM')"
 geboorten_per_gemeente = get_odata(target_url)
 geboorten_per_gemeente['WijkenEnBuurten'] = geboorten_per_gemeente['WijkenEnBuurten'].str.strip()
 geboorten_per_gemeente = geboorten_per_gemeente.rename({'Value':'relatieve_geboorte'}, axis='columns')
