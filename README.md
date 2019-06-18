@@ -11,11 +11,11 @@ Voor elke taal is er een aparte map met daarin codevoorbeelden. De talen die mom
 
 Elke map bevat
 * basics: het downloaden van een tabel, het koppelen van metadata en het downloaden van een gedeelte van een tabel.
-* thematic map: het koppelen van shapefiles aan data om een kaart te maken.
+* thematic map: het koppelen van een geojson met gemeentegrenzen aan data om een kaart te maken.
 * time series graph: het bewerken en het maken van grafieken van tijdreeksen.
 
 ## Werken met geodata
-De Shapefiles die nodig zijn voor thematische kaarten zijn te vinden in de [Geografische data](https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/geografische-data) van het CBS en zijn ook toegevoegd aan de repository in de map Shapefiles.
+De geobestanden die nodig zijn voor thematische kaarten worden door het CBS gepubliceerd op [pdok](https://www.pdok.nl/datasets) van het CBS en zijn ook toegevoegd aan de repository in de map GeoJSON.
 
 ## Licentie
 

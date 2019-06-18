@@ -6,9 +6,12 @@
 # In dit voorbeeld worden gemeentegrenzen gekoppeld aan geboortecijfers om een 
 # thematische kaart te maken.
 
-library(tidyverse)
 library(jsonlite)
-library(sf)
+library(geojsonio)
+library(tidyverse)
+library(sp)
+#library(ggmap)
+
 
 get_odata <- function(targetUrl) {
   response <- fromJSON(url(targetUrl))
@@ -23,9 +26,8 @@ get_odata <- function(targetUrl) {
   return(data)
 }
 
-# De gemeentekaart van het CBS is te vinden op
-# https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/geografische-data
-gemeentegrenzen <- read_sf("~/Shapefiles/buurt_2017/gem_2017.shp")
+# Deze GeoJSON is gedownload van het Nationaal Georegister (vindbaar via pdok.nl).
+gemeentegrenzen <- geojson_read("../GeoJSON/gemeenten2017.geojson",what = "sp")
 
 # Zoek op welke codes bij geboortecijfers horen
 tableUrl <- "https://beta.opendata.cbs.nl/OData4/CBS/83765NED"
@@ -38,10 +40,15 @@ geboorten_per_gemeente <- get_odata(targetUrl) %>%
   mutate(WijkenEnBuurten = str_trim(WijkenEnBuurten)) %>%
   rename(relatieve_geboorte = Value)
 
-gemeentegrenzen <- gemeentegrenzen %>%
-  left_join(geboorten_per_gemeente,by=c("GM_CODE"="WijkenEnBuurten"))
+gemeentegrenzen@data <- gemeentegrenzen@data %>%
+  left_join(geboorten_per_gemeente,by=c("statcode"="WijkenEnBuurten"))
 
-ggplot(data = gemeentegrenzen) +
-  geom_sf(aes(fill = relatieve_geboorte)) +
+g <- fortify(gemeentegrenzen, region = "id")
+gemeentegrenzenDF <- merge(g, gemeentegrenzen@data, by = "id")
+
+ggplot(data = gemeentegrenzenDF) +
+  geom_polygon(aes(x=long, y=lat, group = group, fill = relatieve_geboorte)) +
+  coord_equal()+
   ggtitle("Levend geborenen per 1000 inwoners, 2017") +
-  theme(legend.title = element_blank())
+  theme_void()
+
