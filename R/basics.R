@@ -22,8 +22,10 @@ get_odata <- function(targetUrl) {
 
 tableUrl <- "https://beta.opendata.cbs.nl/OData4/CBS/83765NED"
 
-# Downloaden van gehele tabel
-targetUrl <- paste0(tableUrl,"/Observations")
+# Downloaden van gehele tabel, duurt ongeveer 2 minuten
+# targetUrl <- paste0(tableUrl,"/Observations")
+# Downloaden van eerste 100 rijen uit de tabel
+targetUrl <- paste0(tableUrl,"/Observations?$top=100")
 data <- get_odata(targetUrl)
 head(data)
 
@@ -35,7 +37,7 @@ data <- data %>%
   left_join(codes, by=c("Measure"="Identifier"))%>%
   left_join(groups, by=c("MeasureGroupID"="ID"))
 
-# Gedeelte downloaden van tabel
+# Selectie downloaden van tabel
 wijken_en_buurtencodes <- get_odata(paste0(tableUrl,"/WijkenEnBuurtenCodes"))
 wijken_en_buurtencodes %>% filter(str_detect(Title, "Amsterdam"))
 

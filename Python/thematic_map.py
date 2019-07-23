@@ -11,7 +11,6 @@ thematische kaart te maken.
 import pandas as pd
 import geopandas as gpd
 import requests
-import os
 
 def get_odata(target_url):
     data = pd.DataFrame()
@@ -26,8 +25,10 @@ def get_odata(target_url):
             
     return data
 
-# Deze GeoJSON is gedownload van het Nationaal Georegister (vindbaar via pdok.nl).
-gemeentegrenzen = gpd.read_file(os.path.dirname(os.getcwd()) + "\GeoJSON\gemeenten2017.geojson")
+# De geodata wordt via de API van het Nationaal Georegister van PDOK opgehaald.
+# Een overzicht van beschikbare data staat op https://www.pdok.nl/datasets.
+geodata_url = "https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/wfs?request=GetFeature&service=WFS&version=2.0.0&typeName=cbs_gemeente_2017_gegeneraliseerd&outputFormat=json"
+gemeentegrenzen = gpd.read_file(geodata_url)
 
 # Zoek op welke codes bij geboortecijfers horen
 table_url = "https://beta.opendata.cbs.nl/OData4/CBS/83765NED"
@@ -42,4 +43,5 @@ geboorten_per_gemeente = geboorten_per_gemeente.rename({'Value':'relatieve_geboo
 gemeentegrenzen = pd.merge(gemeentegrenzen, geboorten_per_gemeente, left_on = "statcode", right_on = "WijkenEnBuurten")
 
 p = gemeentegrenzen.plot(column='relatieve_geboorte', figsize = (10,8))
+p.axis('off')
 p.set_title("Levend geborenen per 1000 inwoners, 2017")

@@ -10,8 +10,6 @@ library(jsonlite)
 library(geojsonio)
 library(tidyverse)
 library(sp)
-#library(ggmap)
-
 
 get_odata <- function(targetUrl) {
   response <- fromJSON(url(targetUrl))
@@ -26,8 +24,12 @@ get_odata <- function(targetUrl) {
   return(data)
 }
 
-# Deze GeoJSON is gedownload van het Nationaal Georegister (vindbaar via pdok.nl).
-gemeentegrenzen <- geojson_read("../GeoJSON/gemeenten2017.geojson",what = "sp")
+# De geodata wordt via de API van het Nationaal Georegister van PDOK opgehaald.
+# Een overzicht van beschikbare data staat op https://www.pdok.nl/datasets.
+geoUrl <- "https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/wfs?request=GetFeature&service=WFS&version=2.0.0&typeName=cbs_gemeente_2017_gegeneraliseerd&outputFormat=json"
+fileName <- "gemeentegrenzen2017.geojson"
+download.file(geoUrl, fileName)
+gemeentegrenzen <- geojson_read(fileName, what = "sp")
 
 # Zoek op welke codes bij geboortecijfers horen
 tableUrl <- "https://beta.opendata.cbs.nl/OData4/CBS/83765NED"
@@ -51,4 +53,3 @@ ggplot(data = gemeentegrenzenDF) +
   coord_equal()+
   ggtitle("Levend geborenen per 1000 inwoners, 2017") +
   theme_void()
-

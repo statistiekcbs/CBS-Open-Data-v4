@@ -10,13 +10,12 @@ Voor elke taal is er een aparte map met daarin codevoorbeelden. De talen die mom
 * Python.
 
 Elke map bevat
-* basics: het downloaden van een tabel, het koppelen van metadata en het downloaden van een gedeelte van een tabel.
-* thematic map: het koppelen van een geojson met gemeentegrenzen aan data om een kaart te maken.
+* basics: het downloaden van een tabel, het koppelen van metadata en het downloaden van een selectie van een tabel.
+* thematic map: het koppelen van geodata van PDOK met CBS-data om een kaart te maken.
 * time series graph: het bewerken en het maken van grafieken van tijdreeksen.
 
 ## Werken met geodata
-De geobestanden die nodig zijn voor thematische kaarten worden door het CBS gepubliceerd op [pdok](https://www.pdok.nl/datasets) van het CBS en zijn ook toegevoegd aan de repository in de map GeoJSON.
+De geobestanden die nodig zijn voor thematische kaarten worden door het CBS gepubliceerd via [PDOK (Publieke Dienstverlening Op de Kaart)](https://www.pdok.nl/datasets). Deze geodata is te downloaden in verschillende bestandsformaten zoals Shapefile en GeoJSON en het is ook mogelijk om de bestanden geautomatiseerd op te halen met de API. In de codevoorbeelden wordt gebruik gemaakt van de API. Meer informatie over de geo-API is te vinden in [de documentatie](https://pdok-ngr.readthedocs.io/).
 
 ## Licentie
-
 Op alle datasets van het CBS en alle codevoorbeelden is de licentie Creative Commons Naamsvermelding van toepassing. Als onderdeel van Creative Commons Naamsvermelding is het bij hergebruik verplicht te vermelden dat de gegevens afkomstig zijn van het CBS. Meer informatie is te vinden in de [Disclaimer Open Data](https://www.cbs.nl/-/media/statline/documenten/disclaimer-open-data-v-2.pdf?la=nl-nl).

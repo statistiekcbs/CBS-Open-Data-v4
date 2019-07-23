@@ -26,8 +26,10 @@ def get_odata(target_url):
 
 table_url = "https://beta.opendata.cbs.nl/OData4/CBS/83765NED"
 
-# Downloaden van gehele tabel
-target_url = table_url + "/Observations"
+# Downloaden van gehele tabel, duurt ongeveer 2 minuten
+# target_url = table_url + "/Observations"
+# Downloaden van eerste 100 rijen uit de tabel
+target_url = table_url + "/Observations?$top=100"
 data = get_odata(target_url)
 print(data.head())
 
@@ -39,7 +41,7 @@ data = pd.merge(data, codes, left_on = "Measure", right_on = "Identifier")
 data = pd.merge(data, groups, left_on = "MeasureGroupID", right_on = "ID")
 print(data.head())
 
-# Gedeelte downloaden van tabel
+# Selectie downloaden van tabel
 wijken_en_buurtencodes = get_odata(table_url + "/WijkenEnBuurtenCodes")
 ams = wijken_en_buurtencodes[wijken_en_buurtencodes['Title'].str.contains("Amsterdam")]
 print(ams[['Title','Identifier']])
