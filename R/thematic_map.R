@@ -1,23 +1,28 @@
-# Voorbeelden gebruik van CBS Open Data v3 in R
-# https://www.cbs.nl/nl-nl/onze-diensten/open-data
+# Voorbeelden gebruik van beta-versie CBS Open Data in R
+# https://beta.opendata.cbs.nl
 # Auteur: Jolien Oomens
 # Centraal Bureau voor de Statistiek
 
 # In dit voorbeeld worden gemeentegrenzen gekoppeld aan geboortecijfers om een 
 # thematische kaart te maken.
 
-library(cbsodataR)
+library(jsonlite)
 library(geojsonio)
-library(sp)
 library(tidyverse)
+library(sp)
 
-# Zoek op welke data beschikbaar is
-metadata <- cbs_get_meta("83765NED")
-print(metadata$DataProperties$Key)
-
-# Haal alle geboortecijfers op
-data <- cbs_get_data("83765NED", select=c("WijkenEnBuurten","Codering_3","GeboorteRelatief_25")) %>%
-  mutate(Codering_3 = str_trim(Codering_3))
+get_odata <- function(targetUrl) {
+  response <- fromJSON(url(targetUrl))
+  data <- response$value
+  targetUrl <- response[["@odata.nextLink"]]
+  
+  while(!is.null(targetUrl)){
+    response <- fromJSON(url(targetUrl))
+    data <- bind_rows(data,response$value)
+    targetUrl <- response[["@odata.nextLink"]]
+  }
+  return(data)
+}
 
 # De geodata wordt via de API van het Nationaal Georegister van PDOK opgehaald.
 # Een overzicht van beschikbare data staat op https://www.pdok.nl/datasets.
@@ -26,15 +31,25 @@ fileName <- "gemeentegrenzen2017.geojson"
 download.file(geoUrl, fileName)
 gemeentegrenzen <- geojson_read(fileName, what = "sp")
 
-gemeentegrenzen@data <- gemeentegrenzen@data %>% 
-  left_join(data,by=c("statcode"="Codering_3"))
+# Zoek op welke codes bij geboortecijfers horen
+tableUrl <- "https://beta.opendata.cbs.nl/OData4/CBS/83765NED"
+codes <- get_odata(paste0(tableUrl,"/MeasureCodes"))
+codes %>% filter(str_detect(Title,"Geboorte"))
+
+targetUrl <- paste0(tableUrl,"/Observations?$filter=Measure eq \'M0000173_2\' and startswith(WijkenEnBuurten,\'GM\')")
+
+geboorten_per_gemeente <- get_odata(targetUrl) %>%
+  mutate(WijkenEnBuurten = str_trim(WijkenEnBuurten)) %>%
+  rename(relatieve_geboorte = Value)
+
+gemeentegrenzen@data <- gemeentegrenzen@data %>%
+  left_join(geboorten_per_gemeente,by=c("statcode"="WijkenEnBuurten"))
 
 g <- fortify(gemeentegrenzen, region = "id")
-g <- merge(g, gemeentegrenzen@data, by = "id")
+gemeentegrenzenDF <- merge(g, gemeentegrenzen@data, by = "id")
 
-ggplot(data = g) +
-  geom_polygon(aes(x=long, y=lat, group = group, fill = GeboorteRelatief_25)) +
-  coord_equal() +
+ggplot(data = gemeentegrenzenDF) +
+  geom_polygon(aes(x=long, y=lat, group = group, fill = relatieve_geboorte)) +
+  coord_equal()+
   ggtitle("Levend geborenen per 1000 inwoners, 2017") +
-  labs(fill = "", caption = "Bronnen: CBS, PDOK") + 
   theme_void()
