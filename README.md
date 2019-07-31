@@ -1,13 +1,15 @@
-# CBS Open Data v4
+# CBS Open Data v3
 
-In deze repository zijn codevoorbeelden te vinden van het gebruik van de [beta-versie van CBS Open Data v4](https://beta.opendata.cbs.nl/OData4/index.html). Deze nieuwe versie van de CBS Open Data API is gebaseerd op het [OData 4](https://www.odata.org/)-protocol.
+In deze repository zijn codevoorbeelden te vinden van het gebruik van de [CBS Open Data v3](https://www.cbs.nl/nl-nl/onze-diensten/open-data). Deze nieuwe versie van de CBS Open Data API is gebaseerd op het [OData 3](https://www.odata.org/)-protocol. 
 
-Er wordt beschreven hoe datasets kunnen worden gedownload met metadata, hoe deze gekoppeld kunnen worden, hoe filters werken en er is een voorbeeld uitgewerkt van een thematische kaart.
+Het CBS innoveert continu en werkt momenteel aan een nieuwe versie van de API die OData 4 implementeert. Meer informatie en codevoorbeelden voor deze versie zijn in de repository [CBS Open Data v4](https://github.com/statistiekcbs/CBS-Open-Data-v4) te vinden.
+
+Er wordt beschreven hoe datasets kunnen worden gedownload met metadata, hoe deze gekoppeld kunnen worden, hoe filters en selecties werken en er is een voorbeeld uitgewerkt van een thematische kaart.
 
 ## Codevoorbeelden
 Voor elke taal is er een aparte map met daarin codevoorbeelden. De talen die momenteel ondersteund worden zijn
-* R,
-* Python.
+* R (zie ook het package [cbsodataR](https://github.com/edwindj/cbsodataR)),
+* Python (zie ook het package [cbsodata](https://github.com/J535D165/cbsodata)).
 
 Elke map bevat
 * basics: het downloaden van een tabel, het koppelen van metadata en het downloaden van een selectie van een tabel.
