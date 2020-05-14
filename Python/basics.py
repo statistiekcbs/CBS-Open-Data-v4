@@ -38,7 +38,7 @@ groups = get_odata(table_url + "/MeasureGroups")
 codes = get_odata(table_url + "/MeasureCodes")
 
 data = pd.merge(data, codes, left_on = "Measure", right_on = "Identifier")
-data = pd.merge(data, groups, left_on = "MeasureGroupID", right_on = "ID")
+data = pd.merge(data, groups, left_on = "MeasureGroupId", right_on = "Id")
 print(data.head())
 
 # Selectie downloaden van tabel
