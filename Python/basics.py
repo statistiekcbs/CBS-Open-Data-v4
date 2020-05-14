@@ -46,6 +46,6 @@ wijken_en_buurtencodes = get_odata(table_url + "/WijkenEnBuurtenCodes")
 ams = wijken_en_buurtencodes[wijken_en_buurtencodes['Title'].str.contains("Amsterdam")]
 print(ams[['Title','Identifier']])
 
-target_url = table_url + "/Observations?$filter=WijkenEnBuurten eq \'GM0363    \'"
+target_url = table_url + "/Observations?$filter=WijkenEnBuurten eq 'GM0363'"
 data_amsterdam = get_odata(target_url)
 print(data_amsterdam.head())
