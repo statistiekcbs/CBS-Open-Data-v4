@@ -1,6 +1,6 @@
 """
 Voorbeelden gebruik van beta-versie CBS Open Data in Python
-https://beta.opendata.cbs.nl
+https://beta-odata4.cbs.nl
 Auteur: Jolien Oomens
 Centraal Bureau voor de Statistiek
 
@@ -24,7 +24,7 @@ def get_odata(target_url):
             
     return data
 
-table_url = "https://beta.opendata.cbs.nl/OData4/CBS/83765NED"
+table_url = "https://beta-odata4.cbs.nl/CBS/83765NED"
 
 # Downloaden van gehele tabel, duurt ongeveer 2 minuten
 # target_url = table_url + "/Observations"

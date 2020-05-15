@@ -1,6 +1,6 @@
 """
 Voorbeelden gebruik van beta-versie CBS Open Data in R
-https://beta.opendata.cbs.nl
+https://beta-odata4.cbs.nl
 Auteur: Jolien Oomens
 Centraal Bureau voor de Statistiek
 
@@ -26,7 +26,7 @@ def get_odata(target_url):
     return data
 
 # Bekijk welke metadata beschikbaar is
-table_url = "https://beta.opendata.cbs.nl/OData4/CBS/84120NED"
+table_url = "https://beta-odata4.cbs.nl/CBS/84120NED"
 print(get_odata(table_url))
 
 # Zoek de code van toeristenbelasting op
@@ -77,6 +77,6 @@ jaarcijfers = data[data['frequency'] == 'Y']
 
 p = jaarcijfers.plot(x = 'date', y = 'Value',legend = False)
 p.set_title("Opbrengst toeristenbelasting per jaar")
-p.set_ylim([0,250])
+p.set_ylim([0,300])
 p.set_xlabel("")
 p.set_ylabel("mln euro")

@@ -1,5 +1,5 @@
 # Voorbeelden gebruik van beta-versie CBS Open Data in R
-# https://beta.opendata.cbs.nl
+# https://beta-odata4.cbs.nl
 # Auteur: Jolien Oomens
 # Centraal Bureau voor de Statistiek
 
@@ -20,7 +20,7 @@ get_odata <- function(targetUrl) {
   return(data)
 }
 
-tableUrl <- "https://beta.opendata.cbs.nl/OData4/CBS/83765NED"
+tableUrl <- "https://beta-odata4.cbs.nl/CBS/83765NED"
 
 # Downloaden van gehele tabel, duurt ongeveer 2 minuten
 # targetUrl <- paste0(tableUrl,"/Observations")
@@ -35,11 +35,11 @@ codes <- get_odata(paste0(tableUrl,"/MeasureCodes"))
 
 data <- data %>%
   left_join(codes, by=c("Measure"="Identifier"))%>%
-  left_join(groups, by=c("MeasureGroupID"="ID"))
+  left_join(groups, by=c("MeasureGroupId"="Id"))
 
 # Selectie downloaden van tabel
 wijken_en_buurtencodes <- get_odata(paste0(tableUrl,"/WijkenEnBuurtenCodes"))
 wijken_en_buurtencodes %>% filter(str_detect(Title, "Amsterdam"))
 
-targetUrl <- paste0(tableUrl,"/Observations?$filter=WijkenEnBuurten eq \'GM0363    \'")
+targetUrl <- paste0(tableUrl,"/Observations?$filter=WijkenEnBuurten eq \'GM0363\'")
 data_amsterdam <- get_odata(targetUrl)

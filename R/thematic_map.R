@@ -1,5 +1,5 @@
 # Voorbeelden gebruik van beta-versie CBS Open Data in R
-# https://beta.opendata.cbs.nl
+# https://beta-odata4.cbs.nl
 # Auteur: Jolien Oomens
 # Centraal Bureau voor de Statistiek
 
@@ -32,11 +32,11 @@ download.file(geoUrl, fileName)
 gemeentegrenzen <- geojson_read(fileName, what = "sp")
 
 # Zoek op welke codes bij geboortecijfers horen
-tableUrl <- "https://beta.opendata.cbs.nl/OData4/CBS/83765NED"
+tableUrl <- "https://beta-odata4.cbs.nl/CBS/83765NED"
 codes <- get_odata(paste0(tableUrl,"/MeasureCodes"))
 codes %>% filter(str_detect(Title,"Geboorte"))
 
-targetUrl <- paste0(tableUrl,"/Observations?$filter=Measure eq \'M0000173_2\' and startswith(WijkenEnBuurten,\'GM\')")
+targetUrl <- paste0(tableUrl,"/Observations?$filter=Measure eq \'M000173_2\' and startswith(WijkenEnBuurten,\'GM\')")
 
 geboorten_per_gemeente <- get_odata(targetUrl) %>%
   mutate(WijkenEnBuurten = str_trim(WijkenEnBuurten)) %>%
