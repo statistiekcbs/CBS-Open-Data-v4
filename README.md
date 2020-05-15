@@ -1,6 +1,6 @@
 # CBS Open Data v4
 
-In deze repository zijn codevoorbeelden te vinden van het gebruik van de [beta-versie van CBS Open Data v4](https://beta.opendata.cbs.nl/OData4/index.html). Deze nieuwe versie van de CBS Open Data API is gebaseerd op het [OData 4](https://www.odata.org/)-protocol.
+In deze repository zijn codevoorbeelden te vinden van het gebruik van de [beta-versie van CBS Open Data v4](https://beta.opendata.cbs.nl). Deze nieuwe versie van de CBS Open Data API is gebaseerd op het [OData 4](https://www.odata.org/)-protocol.
 
 Er wordt beschreven hoe datasets kunnen worden gedownload met metadata, hoe deze gekoppeld kunnen worden, hoe filters werken en er is een voorbeeld uitgewerkt van een thematische kaart.
 
